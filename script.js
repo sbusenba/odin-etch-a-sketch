@@ -9,8 +9,12 @@ function clearGrid(){
 
 function newButtonClick (e){
     clearGrid()
-    gridSize= Number(input.value)
-    console.log(input)
+    let inputValue = Number(input.value)
+    if (inputValue >= 50){
+        inputValue = 50;
+    }
+    let gridSize = inputValue
+    
     drawGrid(gridSize)
 
 }
