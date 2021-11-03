@@ -1,0 +1,22 @@
+.container{
+    background-color:black;
+    display:flex; 
+    flex-direction:column;
+    padding:10px;
+    min-height:500px;
+    width:500px;
+}
+.row {
+    flex:1;
+    display:flex;
+    flex-direction:row;
+}
+.cell {
+    background-color: aliceblue;
+    flex:1;
+    border:grey 1px solid;
+    border-radius:2px;
+}
+.darkened {
+    background-color:#303030;
+}
