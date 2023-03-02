@@ -3,16 +3,14 @@ const newButton = document.querySelector('.newButton')
 const input = document.querySelector('input')
 gridSize = 16
 newButton.addEventListener('click',newButtonClick)
+input.addEventListener('change',newButtonClick)
 function clearGrid(){
     container.innerHTML = ""
 }
 
-function newButtonClick (e){
+function newButtonClick (){
     clearGrid()
     let inputValue = Number(input.value)
-    if (inputValue >= 50){
-        inputValue = 50;
-    }
     let gridSize = inputValue
     
     drawGrid(gridSize)
