@@ -2,16 +2,16 @@ const container = document.querySelector('.container')
 const newButton = document.querySelector('.newButton')
 const input = document.querySelector('input')
 const greyScalePalette = ['rgb(247, 247, 247)',
-                        'rgb(239, 239, 239)',
                         'rgb(223, 223, 223)',
-                        'rgb(202, 202, 202)',
                         'rgb(168, 168, 168)',
-                        'rgb(135, 135, 135)',
                         'rgb(109, 109, 109)',
                         'rgb(95, 95, 95)',
-                        'rgb(74, 74, 74)',
-                        'rgb(61, 61, 61)']
+                        'rgb(61, 61, 61)',
+                        'rgb(0, 0 ,0)']
+const rainbowPalette = [
 
+]
+let gridArray = []
 newButton.addEventListener('click',newButtonClick)
 input.addEventListener('change',changeSize)
 
@@ -46,7 +46,7 @@ function applyGreyscale(node){
             currentColorIndex = index;
         }
     })
-    if (currentColorIndex>=0 && currentColorIndex<9){
+    if (currentColorIndex>=0 && currentColorIndex<7){
         console.log('match!')
     node.style.backgroundColor= greyScalePalette[currentColorIndex+1]
     }
@@ -60,7 +60,7 @@ function mouseOver(e){
     let mode = document.querySelector('#mode-select').value
     switch (mode) {
         case 'black':
-            e.target.classList.add('darkened')
+            e.target.style.backgroundColor = '#000000'
             break;
         case 'greyscale':
             applyGreyscale(e.target)
@@ -84,6 +84,8 @@ function drawGrid(width){
         for(let columnNum=0;columnNum<width;columnNum++){
             let cell= document.createElement('div')
             cell.classList.add('cell')
+            cell.setAttribute('data-x',rowNum)
+            cell.setAttribute('data-y',columnNum)
             cell.addEventListener('mouseenter',mouseOver)
             row.appendChild(cell)
 
@@ -91,6 +93,7 @@ function drawGrid(width){
 
         container.appendChild(row)
     }
+    console.log(gridArray)
 }
 let size = parseInt(input.value)
 drawGrid(size)
