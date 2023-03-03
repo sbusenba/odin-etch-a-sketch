@@ -1,17 +1,19 @@
 const container = document.querySelector('.container')
 const newButton = document.querySelector('.newButton')
 const input = document.querySelector('input')
-gridSize = 16
+let gridSize = 16
 newButton.addEventListener('click',newButtonClick)
 input.addEventListener('change',newButtonClick)
 function clearGrid(){
-    container.innerHTML = ""
+    while (container.firstElementChild)
+    container.removeChild(container.firstElementChild)
+
 }
 
 function newButtonClick (){
     clearGrid()
-    let inputValue = Number(input.value)
-    let gridSize = inputValue
+    gridSize = Number(input.value)
+
     
     drawGrid(gridSize)
 
