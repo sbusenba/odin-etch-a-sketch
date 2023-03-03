@@ -1,9 +1,24 @@
 const container = document.querySelector('.container')
 const newButton = document.querySelector('.newButton')
 const input = document.querySelector('input')
+const greyScalePalette = ['rgb(247, 247, 247)',
+                        'rgb(239, 239, 239)',
+                        'rgb(223, 223, 223)',
+                        'rgb(202, 202, 202)',
+                        'rgb(168, 168, 168)',
+                        'rgb(135, 135, 135)',
+                        'rgb(109, 109, 109)',
+                        'rgb(95, 95, 95)',
+                        'rgb(74, 74, 74)',
+                        'rgb(61, 61, 61)']
+
 newButton.addEventListener('click',newButtonClick)
 input.addEventListener('change',changeSize)
-let size = parseInt(input.value)
+
+
+
+
+
 function clearGrid(){
     while (container.firstElementChild)
     container.removeChild(container.firstElementChild)
@@ -23,6 +38,22 @@ function changeSize(){
     console.log(gridSize)
     drawGrid(gridSize)
 }
+function applyGreyscale(node){
+    let currentColorIndex = 0;
+    greyScalePalette.forEach((value,index)=>{
+        console.log(node.style.backgroundColor,'>',value)
+        if (node.style.backgroundColor == value){
+            currentColorIndex = index;
+        }
+    })
+    if (currentColorIndex>=0 && currentColorIndex<9){
+        console.log('match!')
+    node.style.backgroundColor= greyScalePalette[currentColorIndex+1]
+    }
+    
+
+}
+
 
 
 function mouseOver(e){
@@ -32,7 +63,7 @@ function mouseOver(e){
             e.target.classList.add('darkened')
             break;
         case 'greyscale':
-
+            applyGreyscale(e.target)
             break;
         case 'rainbow':
 
@@ -61,6 +92,6 @@ function drawGrid(width){
         container.appendChild(row)
     }
 }
-
+let size = parseInt(input.value)
 drawGrid(size)
 
