@@ -1,6 +1,9 @@
+
+
 const container = document.querySelector('.container')
 const newButton = document.querySelector('.newButton')
-const input = document.querySelector('input')
+const gridInput = document.querySelector('#gridsize')
+const colorInput = document.querySelector('#color-input')
 const greyScalePalette = ['rgb(247, 247, 247)',
                         'rgb(223, 223, 223)',
                         'rgb(168, 168, 168)',
@@ -8,12 +11,19 @@ const greyScalePalette = ['rgb(247, 247, 247)',
                         'rgb(95, 95, 95)',
                         'rgb(61, 61, 61)',
                         'rgb(0, 0 ,0)']
-const rainbowPalette = [
+const rainbowPalette = ['rgb(255, 0, 0)',
+                        'rgb(255, 165, 0)',
+                        'rgb(255, 255, 0)',
+                        'rgb(0, 128, 0)',
+                        'rgb(0, 0, 255)',
+                        'rgb(75, 0, 130)',
+                        'rgb(238, 130, 238)'
 
 ]
+let rainbowIndex = 0
 let gridArray = []
 newButton.addEventListener('click',newButtonClick)
-input.addEventListener('change',changeSize)
+gridInput.addEventListener('change',changeSize)
 
 
 
@@ -27,14 +37,14 @@ function clearGrid(){
 function newButtonClick (e){
     e.preventDefault()
     clearGrid()
-    let gridSize = parseInt(input.value)
+    let gridSize = parseInt(gridInput.value)
     console.log(gridSize)
     drawGrid(gridSize)
 }
 
 function changeSize(){
     clearGrid()
-    let gridSize = parseInt(input.value)
+    let gridSize = parseInt(gridInput.value)
     console.log(gridSize)
     drawGrid(gridSize)
 }
@@ -53,25 +63,36 @@ function applyGreyscale(node){
     
 
 }
-
-
-
+function applyRainbow(node){
+    node.style.backgroundColor = rainbowPalette[rainbowIndex];
+    rainbowIndex<6 ? rainbowIndex= rainbowIndex+1 : rainbowIndex = 0;
+}
+function randomHexColor(){
+    let hexString = '#'
+    hexString = hexString + Math.floor(Math.random()*256).toString(16)
+    hexString = hexString + Math.floor(Math.random()*256).toString(16)
+    hexString = hexString + Math.floor(Math.random()*256).toString(16)
+    return hexString
+}
+function applyRandom(node){
+    node.style.backgroundColor = randomHexColor()
+}
 function mouseOver(e){
     let mode = document.querySelector('#mode-select').value
     switch (mode) {
-        case 'black':
-            e.target.style.backgroundColor = '#000000'
+        case 'default':
+            e.target.style.backgroundColor = colorInput.value
             break;
         case 'greyscale':
             applyGreyscale(e.target)
             break;
         case 'rainbow':
-
+            applyRainbow(e.target)
             break;
         case 'random':
-
+            applyRandom(e.target)
             break;
-    
+            
         default:
             break;
     }
@@ -95,6 +116,6 @@ function drawGrid(width){
     }
     console.log(gridArray)
 }
-let size = parseInt(input.value)
+let size = parseInt(gridInput.value)
 drawGrid(size)
 
